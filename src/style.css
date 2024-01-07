@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+  }
+}
+
+@layer components {
+  .search-input {
+    @apply mb-5 block w-60 text-black;
+  }
+  .button {
+    @apply my-0 mx-auto block cursor-pointer rounded border-2 border-black bg-red-700 px-6 py-1 text-lg text-white;
+  }
+}
+
+@layer utilities {
+  .grayed-out-disabled {
+    @apply disabled:opacity-50;
+  }
+}
