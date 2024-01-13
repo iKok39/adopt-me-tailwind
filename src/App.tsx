@@ -1,4 +1,4 @@
-import { createRoot } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Details from "./components/Details";
@@ -6,6 +6,7 @@ import SearchParams from "./components/SearchParams";
 import { useEffect, useState } from "react";
 import AdoptedPetContext from "./lib/AdoptedPetContext";
 import ThemeSwitch from "./components/ThemeSwitch";
+import { Pet } from "./lib/APIResponsesTypes";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,7 +18,7 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const adoptedPet = useState(null);
+  const adoptedPet = useState(null as Pet | null);
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
@@ -56,5 +57,9 @@ const App = () => {
 };
 
 const container = document.getElementById("root");
+
+if (!container) {
+  throw new Error("no container to render to");
+}
 const root = createRoot(container);
 root.render(<App />);

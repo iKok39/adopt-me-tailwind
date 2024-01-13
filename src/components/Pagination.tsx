@@ -1,6 +1,12 @@
 import React from "react";
 
-const Pagination = ({ petsPerPage, totalPets, setCurrentPage }) => {
+interface Props {
+  petsPerPage: number;
+  totalPets: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Pagination = ({ petsPerPage, totalPets, setCurrentPage }: Props) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalPets / petsPerPage); i++) {

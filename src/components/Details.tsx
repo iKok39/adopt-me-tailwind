@@ -8,12 +8,17 @@ import Modal from "./Modal";
 import AdoptedPetContext from "../lib/AdoptedPetContext";
 
 const Details = () => {
+  const { id } = useParams();
+
+  if (!id) {
+    throw new Error("why did you not give me an id? I need an id.");
+  }
+
+  const results = useQuery(["details", id], fetchPet);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setAdoptedPet] = useContext(AdoptedPetContext);
-  const { id } = useParams();
-  const results = useQuery(["details", id], fetchPet);
 
   if (results.isError) {
     return <h1>Hell no man! There is an error!</h1>;
@@ -27,7 +32,7 @@ const Details = () => {
     );
   }
 
-  const pet = results.data.pets[0];
+  const pet = results?.data?.pets[0];
 
   return (
     <div className="mx-auto w-11/12 rounded-md bg-pink-50 p-4 shadow-lg dark:bg-purple-900 dark:shadow-lg dark:shadow-purple-600">
@@ -72,10 +77,10 @@ const Details = () => {
   );
 };
 
-function DetailsErrorBoundary(props) {
+function DetailsErrorBoundary() {
   return (
     <ErrorBoundary>
-      <Details {...props} />
+      <Details />
     </ErrorBoundary>
   );
 }

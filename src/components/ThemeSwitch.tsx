@@ -1,7 +1,12 @@
 import React from "react";
 import Switch from "react-switch";
 
-const ThemeSwitch = ({ theme, setTheme }) => {
+interface Props {
+  theme: string;
+  setTheme: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const ThemeSwitch = ({ theme, setTheme }: Props) => {
   const toggleTheme = () => {
     setTheme((current) => (current === "light" ? "dark" : "light"));
   };
